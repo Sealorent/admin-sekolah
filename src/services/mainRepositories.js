@@ -98,10 +98,37 @@ class mainRepositories {
     return axios(config)
   }
 
+  postBayarBulanan(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('tagihan_bulan_bayar.php'),
+      data: data
+    }
+    return axios(config)
+  }
+
+  postBayarBebas(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('tagihan_bebas_bayar.php'),
+      data: data
+    }
+    return axios(config)
+  }
+
   getListBebas(data) {
     var config = {
       method: 'post',
       url: Const.getUrl('pembayaran_bebas2.php'),
+      data: data
+    }
+    return axios(config)
+  }
+
+  getListBayarBebas(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('bayar_tagihan_bebas2.php'),
       data: data
     }
     return axios(config)
@@ -131,10 +158,28 @@ class mainRepositories {
     return axios(config)
   }
 
+  insertIpaymu(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('insert_ipaymu.php'),
+      data: data
+    }
+    return axios(config)
+  }
+
   insertIpaymuTabungan(data) {
     var config = {
       method: 'post',
       url: Const.getUrl('insert_ipaymu_tabungan.php'),
+      data: data
+    }
+    return axios(config)
+  }
+
+  caraPembayaran(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('cara_pembayaran.php'),
       data: data
     }
     return axios(config)

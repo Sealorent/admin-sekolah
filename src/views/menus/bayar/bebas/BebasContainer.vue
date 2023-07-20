@@ -13,7 +13,7 @@
                     <p class="font-mulish font-light text-gray-400 text-lg">Tagihan Bebas</p>
                     <p class="font-montserrat font-bold text-2xl ps-1 mt-2">{{ formatRupiah(total) }}</p>
                     <div class="flex flex-row my-4 justify-between">
-                        <button class="bg-primaryColors rounded-full text-white  py-2 w-1/2" @click="$router.push({name:'pembayaranBebas'})" >Bayar Tagihan</button>
+                        <button class="bg-primaryColors rounded-full text-white  py-2 w-1/2" @click="$router.push({name:'bayarBebas'})" >Bayar Tagihan</button>
                         <button class="border-2 border-green-500 rounded-full text-primaryColors py-2  ms-2 w-1/2">Unduh Tagihan</button>
                     </div>
                 </div>

@@ -49,6 +49,14 @@ class MainLocalStorage {
   getParamsChangePassword() {
     return JSON.parse(localStorage.getItem('params'))
   }
+
+  setNoIpaymu(data) {
+    localStorage.setItem('noIpaymu', JSON.stringify(data))
+  }
+
+  getNoIpaymu() {
+    return JSON.parse(localStorage.getItem('noIpaymu'))
+  }
 }
 
 export default new MainLocalStorage()

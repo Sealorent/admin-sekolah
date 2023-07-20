@@ -31,7 +31,12 @@
                                         <p>{{ item2.month_name + ' ' + item.period_start+ ' (' + item.period_start + '/' + item.period_end+ ')' }}</p>
                                         <p>{{ formatRupiah(item2.bill) }}</p>
                                     </div>
-                                    <ButtonBayar :value="item2" @click="getVal(item2)" :check="history.some(item => item.bulan_id === item2.bulan_id)"></ButtonBayar>
+                                    <!-- <p>{{ history.some(item => item.bulan_id === item2.month_id) }}</p> -->
+                                    <ButtonBayar :value="item2" 
+                                        @click="getVal(item2)" 
+                                        :check="history.some(item => item.bulan_id === item2.month_id)"
+                                        >
+                                    </ButtonBayar>
                                 </div>
                             </accordion-content>
                         </accordion-panel>
@@ -42,6 +47,15 @@
                 </div>
             </div>
         </main>
+    </div>
+    <div class="bottom-0 fixed w-full flex justify-center shadow-inner bg-gray-50">
+        <div class="flex flex-col py-2">
+            <div class="flex flex-row justify-between">
+                <p class="font-mulish">Total ({{ bulan_id.length }})</p>
+                <p class="font-mulish">{{ formatRupiah(totalTagihan) }}</p>
+            </div>
+            <button @click="bayar"  class="rounded-full border-2  text-white my-2 font-montserrat font-medium h-12 w-80 text-center bg-primaryColors">Lanjutkan</button>
+        </div>
     </div>
     <vue-bottom-sheet ref="listPeriod">
         <div class="container">
@@ -103,7 +117,9 @@ export default {
             isLoading : false,
             title : 'Pilih Tahun',
             message : null,
-            history : null,
+            history : [],
+            bulan_id : [],
+            totalTagihan : 0,
             
         }
     },
@@ -129,11 +145,14 @@ export default {
             this.setDataHistory()
             let response = await bayarStore.listRingkasan(this.sendDataHistory)
             var state = JSON.parse(response)
-
+            console.log('history state');
+            console.log(state);
             if(state.success){
                 this.isLoading = state.loading
                 this.message = state.message
-                this.history = state.data.detail
+                this.history = state.data.bulan
+                this.bulan_id = this.history.map(item => {return parseInt(item.bulan_id)});
+                this.totalTagihan = this.history.length == 0 ? 0 : this.history.map(item=> parseInt(item.nominal)).reduce(function(a, b){ return ( a ) + (b)})
             }else{
                 this.isLoading = state.loading
                 this.message = state.message
@@ -145,6 +164,7 @@ export default {
             this.setData()
             let response = await bayarStore.listBulanan(this.sendData)
             var state = JSON.parse(response)
+            console.log(state);
             if(state.success){
                 this.isLoading = state.loading
                 this.listBulanan = state.data.detail.map(item => 
@@ -156,62 +176,74 @@ export default {
                             {
                                 'month_name' : item.detail_bulan.month_name_jul,
                                 'bill' : item.detail_bulan.bill_jul,
-                                'status' : item.detail_bulan.status_jul
+                                'status' : item.detail_bulan.status_jul,
+                                'month_id' : item.detail_bulan.month_id_jul
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_agu,
                                 'bill' : item.detail_bulan.bill_agu,
-                                'status' : item.detail_bulan.status_agu
+                                'status' : item.detail_bulan.status_agu,
+                                'month_id' : item.detail_bulan.month_id_agu
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_sep,
                                 'bill' : item.detail_bulan.bill_sep,
-                                'status' : item.detail_bulan.status_sep
+                                'status' : item.detail_bulan.status_sep,
+                                'month_id' : item.detail_bulan.month_id_sep
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_okt,
                                 'bill' : item.detail_bulan.bill_okt,
-                                'status' : item.detail_bulan.status_okt
+                                'status' : item.detail_bulan.status_okt,
+                                'month_id' : item.detail_bulan.month_id_okt
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_nov,
                                 'bill' : item.detail_bulan.bill_nov,
-                                'status' : item.detail_bulan.status_nov
+                                'status' : item.detail_bulan.status_nov,
+                                'month_id' : item.detail_bulan.month_id_nov
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_des,
                                 'bill' : item.detail_bulan.bill_des,
-                                'status' : item.detail_bulan.status_des
+                                'status' : item.detail_bulan.status_des,
+                                'month_id' : item.detail_bulan.month_id_des
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_jan,
                                 'bill' : item.detail_bulan.bill_jan,
-                                'status' : item.detail_bulan.status_jan
+                                'status' : item.detail_bulan.status_jan,
+                                'month_id' : item.detail_bulan.month_id_jan
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_feb,
                                 'bill' : item.detail_bulan.bill_feb,
-                                'status' : item.detail_bulan.status_feb
+                                'status' : item.detail_bulan.status_feb,
+                                'month_id' : item.detail_bulan.month_id_feb
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_mar,
                                 'bill' : item.detail_bulan.bill_mar,
-                                'status' : item.detail_bulan.status_mar
+                                'status' : item.detail_bulan.status_mar,
+                                'month_id' : item.detail_bulan.month_id_mar
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_apr,
                                 'bill' : item.detail_bulan.bill_apr,
-                                'status' : item.detail_bulan.status_apr
+                                'status' : item.detail_bulan.status_apr,
+                                'month_id' : item.detail_bulan.month_id_apr
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_mei,
                                 'bill' : item.detail_bulan.bill_mei,
-                                'status' : item.detail_bulan.status_mei
+                                'status' : item.detail_bulan.status_mei,
+                                'month_id' : item.detail_bulan.month_id_mei
                             },
                             {
                                 'month_name' : item.detail_bulan.month_name_jun,
                                 'bill' : item.detail_bulan.bill_jun,
-                                'status' : item.detail_bulan.status_jun
+                                'status' : item.detail_bulan.status_jun,
+                                'month_id' : item.detail_bulan.month_id_jun
                             },
                         ]) 
                     }) 
@@ -238,6 +270,35 @@ export default {
                 this.selectedPeriod.push(id)
             }
         },
+        async bayar(){
+            this.isLoading = true
+            if(this.checkBayar().success == false){
+                this.isLoading = false
+                this.$snackbar.add({
+                    type : 'error',
+                    text : this.checkBayar().error
+                })
+            }else{
+                let response = await bayarStore.bayarBulanan(this.bulan_id)
+                var state = JSON.parse(response)
+                this.isLoading = state.loading
+                if(state.success){
+                    this.isLoading = state.loading
+                    this.$snackbar.add({
+                        type : 'success',
+                        text : state.data
+                    })
+                    this.$router.push({name : 'ringkasanPembayaran'})
+                }else{
+                    this.isLoading = state.loading
+                    this.$snackbar.add({
+                        type : 'error',
+                        text : state.error
+                    })
+                }
+                
+            }
+        },
         open(){
             this.$refs.listPeriod.open()
         },
@@ -249,15 +310,51 @@ export default {
             this.getListBulanan(this.sendData)
             this.close()
         },
+        getVal(object){
+            if(this.history.some(item => item.bulan_id === object.month_id)){
+                this.isLoading = true
+                this.removeItem(object.month_id)
+                window.location.reload();
+            }
+            if(this.bulan_id.includes(parseInt(object.month_id))){
+                this.totalTagihan -= parseInt(object.bill);
+                this.bulan_id.splice(this.bulan_id.indexOf(object.month_id), 1)
+            }else{
+                this.totalTagihan += parseInt(object.bill);
+                this.bulan_id.push(parseInt(object.month_id));
+            } 
+        },
+        async removeItem(month_id){
+            await bayarStore.removeBulanan(month_id)
+        },
         formatRupiah(data){
             return Rupiah.format(data)
         },
         formatDateInd(data){
             return FormatDateInd.fullYearInd(data)
+        },
+        checkBayar(){
+            if(this.bulan_id.length < 1){
+                return {
+                    success : false,
+                    error : 'Pilih Item Terlebih Dahulu'
+                }
+            }else if(this.totalTagihan < 10000){
+                return {
+                    success : false,
+                    error : 'Minimal Pembayaran Rp. 10.000'
+                }
+            }else{
+                return {
+                    success : true,
+                    error : null
+                }
+            }
         }
     },
     mounted(){
         this.getListBulanan()
+        this.getHistory()
     }
 }
 </script>

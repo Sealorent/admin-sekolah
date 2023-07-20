@@ -132,6 +132,11 @@ const router = createRouter({
       path: '/presensi',
       name: 'presensi',
       component: () => import('../views/menus/presensi/PresensiView.vue')
+    },
+    {
+      path: '/ringkasanPembayaran',
+      name: 'ringkasanPembayaran',
+      component: () => import('../views/menus/bayar/RingkasanView.vue')
     }
   ]
 })
