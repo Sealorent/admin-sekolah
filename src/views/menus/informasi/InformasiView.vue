@@ -4,7 +4,7 @@
         <header class="bg-primaryColors top-0 sticky w-full ">
             <div class="container flex flex-row items-center justify-between">
                 <font-awesome-icon class="text-white" icon="arrow-left" @click="this.$router.push({name :'home'})"/>
-                <p class="text-center text-white font-[20px] font-mulish py-4">Presensi</p>
+                <p class="text-center text-white font-[20px] font-mulish py-4">Semua Informasi</p>
                 <p></p>
             </div>
         </header>
