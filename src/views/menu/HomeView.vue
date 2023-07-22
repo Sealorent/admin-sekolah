@@ -47,7 +47,7 @@
                 <div class="container px-5 pt-6 pb-2">
                     <div class="flex justify-between items-center ">
                         <p class="font-mulish font-bold ">Informasi</p>
-                        <button class="font-mulish font-light ">Lihat Semua </button>
+                        <button class="font-mulish font-light " @click="$router.push({name : 'informasi'})">Lihat Semua </button>
                     </div>
                     <div class="container pb-32 pt-3">
                         <Carousel v-if="isLoadingImage" :itemsToShow="3" :wrapAround="true" :transition="500"  :autoplay="2000"  pause-autoplay-on-hover>
@@ -64,7 +64,7 @@
                         </Carousel>
                         <Carousel v-if="isLoadingImage == false" :itemsToShow="1" :wrapAround="true" :transition="500"  :autoplay="2000"  pause-autoplay-on-hover>
                             <Slide v-for="slide in slides" :key="slide.id">
-                                <div class="carousel__item">
+                                <div class="carousel__item" @click="detail(slide)">
                                     <img :src="slide.detail.foto" alt="" style="width: 1000px; height: 200px;" >
                                 </div>
                             </Slide>
@@ -93,8 +93,8 @@
 <script>
 
 /* state */
-import { information } from '@/stores/informasi.js';
 import { auth } from '@/stores/auth.js';
+import { information } from '@/stores/informasi.js';
 const getInformation = information()
 const storeAuth = auth()
 /* local storage */
@@ -156,6 +156,18 @@ export default {
         },
         close(){
             this.$refs.myBottomSheet.close();
+        },
+        async detail(data){
+            let response = await getInformation.setInformation(data)
+            var state = JSON.parse(response);
+            if(state.error == null){
+                this.$router.push({ name: 'detailInformasi' })
+            }else{
+                this.$snackbar.add({
+                    type : 'error',
+                    text : 'Data Kosong'
+                })
+            }
         }
 
     },

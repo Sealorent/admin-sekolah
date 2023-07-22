@@ -137,6 +137,16 @@ const router = createRouter({
       path: '/ringkasanPembayaran',
       name: 'ringkasanPembayaran',
       component: () => import('../views/menus/bayar/RingkasanView.vue')
+    },
+    {
+      path: '/informasi',
+      name: 'informasi',
+      component: () => import('../views/menus/informasi/InformasiView.vue')
+    },
+    {
+      path: '/detailInformasi',
+      name: 'detailInformasi',
+      component: () => import('../views/menus/informasi/DetailInformasiView.vue')
     }
   ]
 })

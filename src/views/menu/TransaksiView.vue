@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col h-100 ">
-        <header class="bg-primaryColors top-0 w-full">
+        <header class="bg-primaryColors top-0 w-full sticky">
             <p class="text-center text-white font-[500px] font-mulish py-4">Transaksi</p>
         </header>
         <main>

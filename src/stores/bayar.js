@@ -25,6 +25,7 @@ export const bayar = defineStore('bayar', {
         if (response.data.is_correct) {
           this.data = response.data
           this.success = true
+          this.error = null
           this.loading = false
         } else {
           this.data = response.data

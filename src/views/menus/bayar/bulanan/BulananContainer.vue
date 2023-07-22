@@ -91,6 +91,7 @@ export default{
     data(){
         return {
             listBulanan : [],
+            firstList : [],
             listPeriod : ArrayPeriod.getList(),
             sendData : null,
             isloading : true,
@@ -106,106 +107,112 @@ export default{
             let response = await bayarStore.listBulanan(data)
             
             var state = JSON.parse(response)
-            
+            console.log('state');
+            const detail = state.data.detail
             /* map data */
-            this.listBulanan = state.data.detail.map(item => 
-                        ({ 
-                        nama_bayar: item.detail_bulan.nama_bayar, 
-                        period_start: item.detail_bulan.period_start,
-                        period_end: item.detail_bulan.period_end, 
-                        items: ([
-                            {
-                                'month_name' : item.detail_bulan.month_name_jul,
-                                'bill' : item.detail_bulan.bill_jul,
-                                'status' : item.detail_bulan.status_jul
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_agu,
-                                'bill' : item.detail_bulan.bill_agu,
-                                'status' : item.detail_bulan.status_agu
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_sep,
-                                'bill' : item.detail_bulan.bill_sep,
-                                'status' : item.detail_bulan.status_sep
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_okt,
-                                'bill' : item.detail_bulan.bill_okt,
-                                'status' : item.detail_bulan.status_okt
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_nov,
-                                'bill' : item.detail_bulan.bill_nov,
-                                'status' : item.detail_bulan.status_nov
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_des,
-                                'bill' : item.detail_bulan.bill_des,
-                                'status' : item.detail_bulan.status_des
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_jan,
-                                'bill' : item.detail_bulan.bill_jan,
-                                'status' : item.detail_bulan.status_jan
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_feb,
-                                'bill' : item.detail_bulan.bill_feb,
-                                'status' : item.detail_bulan.status_feb
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_mar,
-                                'bill' : item.detail_bulan.bill_mar,
-                                'status' : item.detail_bulan.status_mar
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_apr,
-                                'bill' : item.detail_bulan.bill_apr,
-                                'status' : item.detail_bulan.status_apr
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_mei,
-                                'bill' : item.detail_bulan.bill_mei,
-                                'status' : item.detail_bulan.status_mei
-                            },
-                            {
-                                'month_name' : item.detail_bulan.month_name_jun,
-                                'bill' : item.detail_bulan.bill_jun,
-                                'status' : item.detail_bulan.status_jun
-                            },
-                        ]) 
-                    }) 
-            );
+            this.listBulanan = detail.map(item => ({
+                nama_bayar: item.detail_bulan.nama_bayar, 
+                period_start: item.detail_bulan.period_start,
+                period_end: item.detail_bulan.period_end, 
+                items: ([
+                    {
+                        'month_name' : item.detail_bulan.month_name_jul,
+                        'bill' : item.detail_bulan.bill_jul,
+                        'status' : item.detail_bulan.status_jul
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_agu,
+                        'bill' : item.detail_bulan.bill_agu,
+                        'status' : item.detail_bulan.status_agu
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_sep,
+                        'bill' : item.detail_bulan.bill_sep,
+                        'status' : item.detail_bulan.status_sep
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_okt,
+                        'bill' : item.detail_bulan.bill_okt,
+                        'status' : item.detail_bulan.status_okt
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_nov,
+                        'bill' : item.detail_bulan.bill_nov,
+                        'status' : item.detail_bulan.status_nov
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_des,
+                        'bill' : item.detail_bulan.bill_des,
+                        'status' : item.detail_bulan.status_des
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_jan,
+                        'bill' : item.detail_bulan.bill_jan,
+                        'status' : item.detail_bulan.status_jan
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_feb,
+                        'bill' : item.detail_bulan.bill_feb,
+                        'status' : item.detail_bulan.status_feb
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_mar,
+                        'bill' : item.detail_bulan.bill_mar,
+                        'status' : item.detail_bulan.status_mar
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_apr,
+                        'bill' : item.detail_bulan.bill_apr,
+                        'status' : item.detail_bulan.status_apr
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_mei,
+                        'bill' : item.detail_bulan.bill_mei,
+                        'status' : item.detail_bulan.status_mei
+                    },
+                    {
+                        'month_name' : item.detail_bulan.month_name_jun,
+                        'bill' : item.detail_bulan.bill_jun,
+                        'status' : item.detail_bulan.status_jun
+                    },
+                ])
+            })
+            )
+            this.firstList = this.listBulanan
+            this.total = this.sum(this.listBulanan)
             
-            var softContainer;
+        },
+        filter(){
+            let softContainer;
+
             if(this.pending == false && this.selesai == true){ // selesai true pending false
+                console.log('selesai true');
                 softContainer =  this.filterStatus(this.listBulanan);
             }else if(this.pending == true && this.selesai == false){
+                console.log('pending true');
                 softContainer =  this.filterStatus(this.listBulanan);
             }else{
-                softContainer = this.listBulanan;
+                softContainer = this.firstList;
             }        
-
             this.total = this.sum(softContainer)
             this.listBulanan = softContainer;
         },
         togglePending(){
             if (this.pending) {
                 this.pending = false
-                this.getListBulanan()
+                this.filter()
             } else {
                 this.pending = true
-                this.getListBulanan()
+                this.filter()
             }
         },
         toggleSelesai(){
             if (this.selesai) {
                 this.selesai = false
-                this.getListBulanan()
+                this.filter()
             } else {
                 this.selesai = true
-                this.getListBulanan()
+                this.filter()
             }
         },
         open(){

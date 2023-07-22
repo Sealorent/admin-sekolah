@@ -57,6 +57,14 @@ class MainLocalStorage {
   getNoIpaymu() {
     return JSON.parse(localStorage.getItem('noIpaymu'))
   }
+
+  setInformation(data) {
+    localStorage.setItem('information', JSON.stringify(data))
+  }
+
+  getInformation() {
+    return JSON.parse(localStorage.getItem('information'))
+  }
 }
 
 export default new MainLocalStorage()

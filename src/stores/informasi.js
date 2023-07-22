@@ -29,6 +29,32 @@ export const information = defineStore('information', {
         this.error = err.message
         return JSON.stringify(state)
       }
+    },
+    setInformation(data) {
+      if (data != null) {
+        mainLocalStorage.setInformation(data)
+        this.data = mainLocalStorage.getInformation()
+        this.loading = false
+        this.error = null
+      } else {
+        this.loading = false
+        this.error = 'Data tidak ditemukan'
+      }
+      return JSON.stringify(state)
+    },
+    detailInformation() {
+      let data = mainLocalStorage.getInformation()
+      if (data != null) {
+        this.loading = false
+        this.data = data
+        this.error = null
+        return JSON.stringify(state)
+      } else {
+        this.data = null
+        this.loading = false
+        this.error = null
+        return JSON.stringify(state)
+      }
     }
   }
 })
