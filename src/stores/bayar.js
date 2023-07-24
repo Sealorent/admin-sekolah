@@ -250,16 +250,29 @@ export const bayar = defineStore('bayar', {
         return JSON.stringify(state)
       }
     },
+
     async caraPembayaran(data) {
       try {
         let response = await MainRepositories.caraPembayaran(data)
         console.log(response)
-        if (response.data.is_correct) {
+        console.log(response.data.bank)
+        if (
+          response.data.is_correct &&
+          response.data != ' ' &&
+          response.data != null &&
+          response.data.bank != null
+        ) {
           this.data = response.data
           this.loading = false
+          this.success = true
         } else {
+          this.success = false
+          this.data = null
           this.loading = false
-          this.error = response.data.message
+          this.error =
+            response.data.bank == null || response.data.bank == ' '
+              ? 'Bank Masih Perbaikan'
+              : response.data.message
         }
         return JSON.stringify(state)
       } catch (err) {

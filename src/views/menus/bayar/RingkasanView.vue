@@ -1,6 +1,6 @@
 <style>
 .bottom-sheet__card{
-    height: 50% !important;
+    height: 100% !important;
 }
 </style>
 
@@ -233,7 +233,7 @@ export default {
                 
                 const res2 = await bayarStore.caraPembayaran(sendData)
                 const state2 = JSON.parse(res2)
-
+                
                 if(state2.success){
                     this.isLoading = state2.loading
                     this.pembayaranSuccess = state2.data
@@ -242,8 +242,16 @@ export default {
                         type : 'error',
                         text : state2.error
                     })
+                    this.isLoading = state2.loading
+                    this.paymentMethod = null
                 }
-
+            }else{
+                this.isLoading = state.loading
+                this.$snackbar.add({
+                    type : 'error',
+                    text : state.error
+                })
+                this.paymentMethod = null
             }
 
 

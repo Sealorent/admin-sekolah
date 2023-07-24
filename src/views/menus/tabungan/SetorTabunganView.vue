@@ -153,41 +153,72 @@ export default {
                 })
                 this.isLoading = false
             }else{
-                var data = JSON.stringify({
-                    "student_nis": mainLocalStorage.getAuth().nis,
+
+                var insertData = JSON.stringify({
+                    "nis": mainLocalStorage.getAuth().nis,
                     "kode_sekolah": mainLocalStorage.getAuth().kode_sekolah,
-                    "noref": this.data.nomor,
                     "nominal": this.nominal,
-                    "payment_channel": this.paymentMethod.metode,
-                    "catatan": this.catatan,
-                    "ipaymu_no_trans": this.data.no_ipaymu
+                    "bayar": "Bayar",
+                    "catatan": this.catatan
                 });
-                const response = await tabunganStore.insertIpaymu(data)
-                const state = JSON.parse(response)
-                console.log('state1');
-                if(state.erorr == null){
-                    var sendData = JSON.stringify({
-                        "student_nis": mainLocalStorage.getAuth().nis,
-                        "kode_sekolah": mainLocalStorage.getAuth().kode_sekolah,
-                        "noref": this.data.nomor,
-                        "nominal": this.nominal,
-                        "payment_channel": this.paymentMethod.metode,
-                        "ipaymu_no_trans": this.data.no_ipaymu,
-                    });
-                    const response = await tabunganStore.caraPembayaran(sendData)
-                    const state2 = JSON.parse(response)
-                    console.log('data2');
-                    console.log(sendData);
-                    console.log('state2');
-                    console.log(state2);
-                    this.isLoading = state2.loading
-                    this.pembayaranSuccess = state2.data
+
+                const responseInsert = await tabunganStore.topUpTabungan(insertData)
+                const resInsert = JSON.parse(responseInsert)
+                if(resInsert.success){
+                        this.loading = false
+                        var data = JSON.stringify({
+                            "student_nis": mainLocalStorage.getAuth().nis,
+                            "kode_sekolah": mainLocalStorage.getAuth().kode_sekolah,
+                            "noref": this.data.nomor,
+                            "nominal": this.nominal,
+                            "payment_channel": this.paymentMethod.metode,
+                            "catatan": this.catatan,
+                            "ipaymu_no_trans": this.data.no_ipaymu
+                        });
+
+                        const response = await tabunganStore.insertIpaymu(data)
+                        const state = JSON.parse(response)
+                        console.log('state1');
+                        console.log(state);
+
+                        if(state.success){
+                            var sendData = JSON.stringify({
+                                "student_nis": mainLocalStorage.getAuth().nis,
+                                "kode_sekolah": mainLocalStorage.getAuth().kode_sekolah,
+                                "noref": this.data.nomor,
+                                "nominal": this.nominal,
+                                "payment_channel": this.paymentMethod.metode,
+                                "ipaymu_no_trans": this.data.no_ipaymu,
+                            });
+                        
+                            const response = await tabunganStore.caraPembayaran(sendData)
+                            const state2 = JSON.parse(response)
+                            if(state2.success){
+                                    this.isLoading = state2.loading
+                                    this.pembayaranSuccess = state2.data
+                            }else{
+                                this.isLoading = false
+                                this.paymentMethod = null
+                                this.$snackbar.add({
+                                        type : 'error',
+                                        text : 'Bank Pembayaran Sedang Bermasalah'
+                                    })
+
+                            }
+                        }else{
+                            console.log('error');
+                            this.$snackbar.add({
+                                type : 'error',
+                                text : state.erorr
+                            })
+                            this.$router.push({name : 'tabungan'})
+                        }
                 }else{
                     this.$snackbar.add({
                         type : 'error',
-                        text : state.erorr
+                        text : responseInsert.erorr
                     })
-                    this.$router.push({name : 'tabungan'})
+                    this.loading = false
                 }
             }
         }

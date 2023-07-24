@@ -158,6 +158,15 @@ class mainRepositories {
     return axios(config)
   }
 
+  topUpTabungan(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('top_up_tabungan.php'),
+      data: data
+    }
+    return axios(config)
+  }
+
   insertIpaymu(data) {
     var config = {
       method: 'post',
