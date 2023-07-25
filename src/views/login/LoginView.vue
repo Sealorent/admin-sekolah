@@ -1,5 +1,8 @@
 <template>
     <div class="flex flex-col h-100" >
+        <!-- <div class="bg-primaryColors text-white py-2 text-center z-10">
+            <p id="downloadBtn" >Buat Aplikasi ini di mobile, <button @click="installPWA"><u >Download</u></button></p>
+        </div> -->
         <main class="flex-grow py-20">
             <div class="container pt-2">
                 <div class="w-full flex flex-row justify-center">
@@ -69,8 +72,38 @@ export default {
                     this.error = null
                 }, 2000);
             }
-        }
+        },
+    //     installPWA() {
+    //   // Check if the deferredPrompt is available
+    //         if (this.deferredPrompt) {
+    //             // Show the installation prompt when the download button is clicked
+    //             this.deferredPrompt.prompt();
+
+    //             // Wait for the user to respond to the prompt
+    //             this.deferredPrompt.userChoice.then((choiceResult) => {
+    //             // Reset the deferredPrompt once the prompt is dismissed
+    //                 this.deferredPrompt = null;
+    //                 // Hide the download button after the prompt is shown
+    //                 document.getElementById('downloadBtn').style.display = 'none';
+    //             });
+    //         }
+    //     },
     },
+    mounted (){
+        if ('onbeforeinstallprompt' in window) {
+        // Add event listener for beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', (event) => {
+                // Prevent the default prompt to show
+                event.preventDefault();
+
+                // Store the event for later use
+                this.deferredPrompt = event;
+
+                // Show the download button
+                document.getElementById('downloadBtn').style.display = 'block';
+            });
+        }
+    }
 
 }
 </script>
