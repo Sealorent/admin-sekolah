@@ -95,7 +95,7 @@
     <!-- bottom sheet -->
     <vue-bottom-sheet ref="metodeBayar">
             <div class="container">
-                <p class="text-gray-400 mb-3 font-mulish">Pilih Metode Pembayaran</p>
+                <p class="text-gray-400 font-mulish">Pilih Metode Pembayaran</p>
                 <!-- <div class="grid grid-cols-3 gap-3 pt-4" > -->
                 <Accordion always-open  v-for="item in listMetodeBayar"  :key="item">
                     <accordion-panel>
@@ -195,12 +195,35 @@ export default {
             }
         },
         async removeBebas(bebas_id){
-            await bayarStore.removeBebas(bebas_id)
-            window.location.reload();
+            this.isLoading = true;
+            let res = await bayarStore.removeBebas(bebas_id)
+            let state = JSON.parse(res)
+            console.log('remove bebas');
+            console.log(state);
+            if(state.success){
+                this.getRingkasan()
+            }else{
+                this.$snackbar.add({
+                    type : 'error',
+                    text : "Gagal menghapus tagihan"
+                })
+            }
         },
         async removeBulanan(month_id){
-            await bayarStore.removeBulanan(month_id)
-            window.location.reload();
+            this.isLoading = true;
+            let res = await bayarStore.removeBulanan(month_id)
+            let state = JSON.parse(res)
+            console.log('remove bulan');
+            console.log(state);
+            if(state.success){
+                this.getRingkasan()
+            }else{
+                this.isLoading = false;
+                this.$snackbar.add({
+                    type : 'error',
+                    text : "Gagal menghapus tagihan"
+                })
+            }
         },
         setPayment(data){
             this.paymentMethod = data

@@ -1,14 +1,11 @@
 <template>
     <div class="flex flex-col h-100" >
-        <!-- <div class="bg-primaryColors text-white py-2 text-center z-10">
-            <p id="downloadBtn" >Buat Aplikasi ini di mobile, <button @click="installPWA"><u >Download</u></button></p>
-        </div> -->
-        <main class="flex-grow py-20">
+        <main class="flex-grow">
             <div class="container pt-2">
                 <div class="w-full flex flex-row justify-center">
-                    <img src="@/assets/images/adminsekolah.png" alt="" class="w-20">
+                    <img src="@/assets/images/adminsekolah.png" alt="" class="w-20 h-20">
                 </div>
-                <p class="text-center text-[15px]  font-mulish font-[600] pt-6">Assalamu'alaikum Selamat Datang Di</p>
+                <p class="text-center text-[15px] font-mulish font-[600] pt-6">Assalamu'alaikum Selamat Datang Di</p>
                 <p class="text-center text-[20px] font-mulish font-bold">Admin Sekolah</p>
                 <div class="flex flex-col item-center gap-y-2 container pt-10">
                     <input v-model="kode_sekolah" type="text" class=" font-mulish border-2 rounded-lg border-gray-400  px-2 py-3 mb-3" placeholder="Kode Sekolah" />
