@@ -268,6 +268,12 @@ class mainRepositories {
     }
     return axios(config)
   }
+
+  getPdf(data) {
+    return http.get('kwitansi.php', {
+      params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
+    })
+  }
 }
 
 export default new mainRepositories()

@@ -147,6 +147,11 @@ const router = createRouter({
       path: '/detailInformasi',
       name: 'detailInformasi',
       component: () => import('../views/menus/informasi/DetailInformasiView.vue')
+    },
+    {
+      path: '/getPdf',
+      name: 'getPdf',
+      component: () => import('../components/PdfViewer.vue')
     }
   ]
 })

@@ -36,7 +36,7 @@
                                 <p class="mt-2" :class="item2.status == '1' ? 'text-primaryColors' : 'text-red-500' ">{{ item2.status == '1' ? 'Lunas' : 'Belum Lunas' }}</p>
                             </div>
                         </accordion-content>
-                    </accordion-panel>
+                    </accordion-panel>  
                 </Accordion>
             </div>
         </div>
