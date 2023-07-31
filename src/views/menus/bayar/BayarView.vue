@@ -6,7 +6,7 @@
                 <p class="text-center text-white font-[500px] font-mulish py-4">Bayar</p>
                 <div class="relative flex  h-10 w-10 items-center" @click="$router.push({name:'ringkasanPembayaran'})">
                     <font-awesome-icon :icon="['fas', 'cart-shopping']" class="text-white flex-1" />
-                    <span  class="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right  text-white font-mono text-sm leading-tight text-center">
+                    <span v-if="itemLength > 0"  class="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right  text-white font-mono text-sm leading-tight text-center">
                         {{ itemLength }}
                     </span>
                 </div>

@@ -17,7 +17,30 @@ export const pdf = defineStore('pdf', {
         let response = await mainRepositories.getPdf(mainLocalStorage.getAuth())
         if (response.data.is_correct == true) {
           this.success = true
-          this.data = response.laporan
+          this.data = response.data.laporan
+          this.loading = false
+          this.error = null
+        } else {
+          this.success = false
+          this.data = null
+          this.loading = false
+          this.error = 'error'
+        }
+        return JSON.stringify(state)
+      } catch (err) {
+        this.loading = false
+        this.error = err.message
+        return JSON.stringify(state)
+      }
+    },
+    async getTagihanBulanan() {
+      try {
+        let response = await mainRepositories.getTagihanBulananPdf(mainLocalStorage.getAuth())
+        console.log('pdf')
+        console.log(response)
+        if (response.data.is_correct == true) {
+          this.success = true
+          this.data = response.data.link
           this.loading = false
           this.error = null
         } else {

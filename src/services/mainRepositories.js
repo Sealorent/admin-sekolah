@@ -274,6 +274,12 @@ class mainRepositories {
       params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
     })
   }
+
+  getTagihanBulananPdf(data) {
+    return http.get('unduh_tagihan.php', {
+      params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
+    })
+  }
 }
 
 export default new mainRepositories()

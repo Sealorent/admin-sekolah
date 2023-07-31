@@ -3,7 +3,7 @@
         <header class="bg-primaryColors top-0 w-full sticky flex flex-row items-center justify-between px-5">
             <p></p>
             <p class="text-center text-white font-[500px] font-mulish py-4">Transaksi</p>
-            <font-awesome-icon class="text-white" icon="receipt" @click="this.$router.push({name:'getPdf'})"/>
+            <font-awesome-icon class="text-white" icon="receipt" @click="this.$router.push({name:'getPdf', params: { type : 'kwitansi' }})"/>
         </header>
         <main>
             <div class="flex flex-nowrap overflow-x-auto scrollbar-hidden pt-2">

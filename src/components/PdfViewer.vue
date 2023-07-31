@@ -25,12 +25,12 @@
 <template>
     <div class="flex flex-col h-screen">
         <header class="bg-primaryColors top-0 w-full sticky flex flex-row items-center justify-between px-5">
-            <font-awesome-icon class="text-white" icon="arrow-left" @click="this.$router.push({name :'transaksi'})"/>
-            <p class="text-center text-white font-[500px] font-mulish py-4">Kwitansi</p>
+            <font-awesome-icon class="text-white" icon="arrow-left" @click="this.$router.push({name : route})"/>
+            <p class="text-center text-white font-[500px] font-mulish py-4">Tagihan Bulanan</p>
             <p></p>
         </header>
         <main class="flex-grow ">
-            <p class="flex h-screen items-center justify-center text-red-500 font-semibold">{{ message }}</p>
+            <p class="flex h-screen items-center justify-center text-red-500 font-semibold" v-if="file == null">{{ message }}</p>
             <div class="iframe-container">
                 <iframe :src="file" frameborder="0"></iframe>
             </div>
@@ -55,7 +55,9 @@ export default {
         return {
             file : null,
             message : null,
-            set : null
+            set : null,
+            isLoading : false,
+            route : null
         }
     },
     methods : {
@@ -63,10 +65,9 @@ export default {
             this.isLoading = true
             const response = await pdfStore.getPdf()
             const state = JSON.parse(response)
-            console.log(state);
             if(state.success){
                 this.isLoading = state.loading
-                this.file = state.data
+                this.file = state.data[0].detail.link
             }else{
                 this.message = state.error
                 this.isLoading = state.loading
@@ -75,12 +76,40 @@ export default {
                     text : state.error
                 })
             }
-        }
+        },
+        async getBulananPDF(){
+            this.isLoading = true
+            const response = await pdfStore.getTagihanBulanan()
+            console.log(response);
+            const state = JSON.parse(response)
+            console.log(state);
+            if(state.success){
+                this.isLoading = state.loading
+                this.file = state.data
+                console.log(this.file);
+            }else{
+                this.message = state.error
+                this.isLoading = state.loading
+                this.$snackbar.add({
+                    type : 'error',
+                    text : state.error
+                })
+            }
+        },
+
     },
     mounted(){
-        this.getPDF()
-        console.log(this.message);
-        console.log(this.set);
+        const type = this.$route.params.type;
+        if(type== 'kwitansi'){
+            this.route = 'transaksi'
+            this.getPDF()
+        }else if(type == 'bulanan'){
+            this.route = 'bayar'
+            this.getBulananPDF()
+        }else if(type == 'pembayaran'){
+            this.route = 'bayar'
+            this.getPDF()
+        }
     },
 
 }

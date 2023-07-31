@@ -1,0 +1,1 @@
+import{M as t}from"./mainLocalStorage-1cdc50c7.js";class a{static getList(){return t.getPeriod().map(r=>({id:r.id,label:r.period_start+"/"+r.period_end}))}static getArray(){return t.getPeriod().map(r=>parseInt(r.id))}}const o=a;export{o as A};

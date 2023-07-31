@@ -149,7 +149,7 @@ const router = createRouter({
       component: () => import('../views/menus/informasi/DetailInformasiView.vue')
     },
     {
-      path: '/getPdf',
+      path: '/getPdf/:type',
       name: 'getPdf',
       component: () => import('../components/PdfViewer.vue')
     }

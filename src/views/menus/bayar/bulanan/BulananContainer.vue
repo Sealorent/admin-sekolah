@@ -19,7 +19,7 @@
                     <p class="font-montserrat font-bold text-2xl ps-1 mt-2">{{ formatRupiah(total) }}</p>
                     <div class="flex flex-row my-4 justify-between">
                         <button class="bg-primaryColors font-mulish rounded-full text-white  py-2  w-1/2" @click="$router.push({name:'bayarBulanan'})">Bayar Tagihan</button>
-                        <button class="border-2 border-blue-500 font-mulish rounded-full text-primaryColors py-2  ms-2 w-1/2">Unduh Tagihan</button>
+                        <button class="border-2 border-blue-500 font-mulish rounded-full text-primaryColors py-2  ms-2 w-1/2" @click="$router.push({name : 'getPdf', params: { type : 'bulanan' } })">Unduh Tagihan</button>
                     </div>
                 </div>
             </div>

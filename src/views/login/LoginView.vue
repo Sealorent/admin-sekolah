@@ -43,6 +43,9 @@ export default {
             // kode_sekolah : '2020123',
             // nis : '202202112005',
             // password : '1234567',
+            // kode_sekolah : '',
+            // nis : '',
+            // password : '',
             isLoading : false,
             error : null,
         }
