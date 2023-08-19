@@ -43,7 +43,7 @@ export default {
       this.ctx.lineTo(0, this.canvas.height);
       this.ctx.closePath();
 
-      this.ctx.fillStyle = '#34DB39';
+      this.ctx.fillStyle = '#3C8DBC';
       this.ctx.fill();
 
       this.wave.phase += this.wave.speed;

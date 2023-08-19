@@ -8,19 +8,19 @@
                 <p class="text-center text-[15px] font-mulish font-[600] pt-6">Assalamu'alaikum Selamat Datang Di</p>
                 <p class="text-center text-[20px] font-mulish font-bold">Admin Sekolah</p>
                 <div class="container flex flex-col pt-10 item-center gap-y-2">
-                    <input v-model="kode_sekolah" type="text" class="px-2 py-3 mb-3 border-2 border-gray-400 rounded-lg  font-mulish" placeholder="Kode Sekolah" />
+                    <input v-model="kode_sekolah" type="text" class="px-2 py-3 mb-3 border-2 border-gray-400 rounded-lg font-mulish" placeholder="Kode Sekolah" />
                     <input v-model="nis" type="text" class="px-2 py-3 border-2 border-gray-400 rounded-lg font-mulish" placeholder="NIS" />
                     <PasswordContainer v-model:value="password" title="Password" />
                     <small class="text-end text-primaryColors"><button @click="this.$router.push('/resetPassword')"> Lupa Password ?</button></small>
                     <button @click="loginRequest" class="w-full h-12 text-white border-2 rounded-full bg-primaryColors" >Lanjut</button>
                     <a href="" class="text-center text-red-500 font-mulish text-md">{{ error }}</a>
-                    <a href="" class="text-center font-mulish text-primaryColors text-md">Hapus Riwayat</a>
+                    <a href="" class="text-center font-mulish text-primaryColors text-md" @click="clear">Hapus Riwayat</a>
                 </div>
             </div>
         </main>
         <footer class="h-20">
             <p class="text-center text-[13px] font-mulish pt-8 ">Butuh Bantuan ?</p>
-            <p class="text-center text-[15px] font-mulish text-primaryColors pt-2">Hubungi Admin</p>
+            <p class="text-center text-[15px] font-mulish text-primaryColors pt-2" @click="openWhatsApp">Hubungi Admin</p>
         </footer>
     </div>
 </template>
@@ -37,15 +37,15 @@ export default {
         return{
             // kode_sekolah : '2302052',
             // nis : '123456',
-            kode_sekolah : '2020123',
-            nis : '202103092004',
-            password : '123456',
+            // kode_sekolah : '2020123',
+            // nis : '202103092004',
+            // password : '123456',
             // kode_sekolah : '2020123',
             // nis : '202202112005',
             // password : '1234567',
-            // kode_sekolah : '',
-            // nis : '',
-            // password : '',
+            kode_sekolah : '',
+            nis : '',
+            password : '',
             isLoading : false,
             error : null,
         }
@@ -72,6 +72,18 @@ export default {
                     this.error = null
                 }, 2000);
             }
+        },
+        clear(){
+            localStorage.clear();
+            this.$snackbar.add({
+                type: 'success',
+                text: 'Riwayat berhasil dihapus'
+            })
+        },
+        openWhatsApp() {
+            const phoneNumber = '6281233640003'; // Replace with the actual phone number
+            const whatsappURL = `https://wa.me/${phoneNumber}`;
+            window.open(whatsappURL, '_blank');
         },
     //     installPWA() {
     //   // Check if the deferredPrompt is available
