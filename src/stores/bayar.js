@@ -256,12 +256,11 @@ export const bayar = defineStore('bayar', {
         let response = await MainRepositories.caraPembayaran(data)
         console.log(response)
         console.log(response.data.bank)
-        if (
-          response.data.is_correct &&
-          response.data != ' ' &&
-          response.data != null &&
-          response.data.bank != null
-        ) {
+        if (response.data.is_correct && response.data.bank != null) {
+          // &&
+          // response.data != ' ' &&
+          // response.data != null &&
+          // response.data.bank != null
           this.data = response.data
           this.loading = false
           this.success = true
@@ -271,7 +270,7 @@ export const bayar = defineStore('bayar', {
           this.loading = false
           this.error =
             response.data.bank == null || response.data.bank == ' '
-              ? 'Bank Masih Perbaikan'
+              ? 'Cara Pembayaran Masih Terkendala'
               : response.data.message
         }
         return JSON.stringify(state)

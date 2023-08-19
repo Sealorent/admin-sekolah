@@ -7,7 +7,7 @@
 <template>
     <LoadingCircle v-if="isLoading"/>
     <div class="flex flex-col h-100" v-if="pembayaranSuccess == null">
-        <header class="bg-primaryColors top-0 sticky w-full">
+        <header class="sticky top-0 w-full bg-primaryColors">
             <div class="container flex flex-row items-center justify-between">
                 <font-awesome-icon class="text-white" icon="arrow-left" @click="this.$router.push({name :'home'})"/>
                 <p class="text-center text-white font-[500px] font-mulish py-4">Ringkasan</p>
@@ -18,59 +18,59 @@
           <div class="container">
             <div class="flex flex-col">
                 <p class="font-mulish">No. Ref</p>
-                <p class="font-montserrat text-lg">{{ dataRingkasan.noref }}</p>
+                <p class="text-lg font-montserrat">{{ dataRingkasan.noref }}</p>
             </div>
             <div class="flex flex-col pt-2 ">
                 <div class="flex flex-row justify-between pb-4">
-                    <p class="font-mulish uppercase text-sm text-gray-400">{{`item (${itemLength})`}}</p>
-                    <p class="font-mulish uppercase text-sm text-gray-400">Jumlah</p>
+                    <p class="text-sm text-gray-400 uppercase font-mulish">{{`item (${itemLength})`}}</p>
+                    <p class="text-sm text-gray-400 uppercase font-mulish">Jumlah</p>
                 </div>
                 <!-- listringkasan -->
-                <div v-for="item in listBulan" :key="item" class="container flex flex-row justify-between border-2 shadow-sm py-2 my-1" >
-                    <div class=" w-full flex flex-col ">
+                <div v-for="item in listBulan" :key="item" class="container flex flex-row justify-between py-2 my-1 border-2 shadow-sm" >
+                    <div class="flex flex-col w-full ">
                         <p class="font-mulish">{{ item.nama_bayar }}</p>
                     </div>
-                    <div class=" w-full flex flex-row justify-between">
-                        <div class=" w-full flex items-center">
+                    <div class="flex flex-row justify-between w-full ">
+                        <div class="flex items-center w-full ">
                             <p class="font-mulish ms-3">{{ formatRupiah(item.nominal) }}</p>
                         </div>
-                        <div class=" w-1/3 flex items-center justify-center">
+                        <div class="flex items-center justify-center w-1/3 ">
                             <font-awesome-icon  :icon="['fas', 'trash']" size="sm" class="text-red-500" @click="removeBulanan(item.bulan_id)" />
                         </div>
                     </div>
                 </div>
-                <div v-for="item in listBebas" :key="item" class="container flex flex-row justify-between border-2 shadow-sm py-2 my-1" >
-                    <div class=" w-full flex flex-col ">
+                <div v-for="item in listBebas" :key="item" class="container flex flex-row justify-between py-2 my-1 border-2 shadow-sm" >
+                    <div class="flex flex-col w-full ">
                         <p class="font-mulish">{{ item.nama_bayar }}</p>
                     </div>
-                    <div class=" w-full flex flex-row justify-between">
-                        <div class=" w-full flex items-center">
+                    <div class="flex flex-row justify-between w-full ">
+                        <div class="flex items-center w-full ">
                             <p class="font-mulish ms-3">{{ formatRupiah(item.nominal) }}</p>
                         </div>
-                        <div class=" w-1/3 flex items-center justify-center">
+                        <div class="flex items-center justify-center w-1/3 ">
                             <font-awesome-icon  :icon="['fas', 'trash']" size="sm" class="text-red-500" @click="removeBebas(item.bebas_id)" />
                         </div>
                     </div>
                 </div>
-                <div class=" flex flex-row justify-between border-t-2 pt-2 mt-6 mb-6">
-                    <p class="font-mulish uppercase">Total</p>
+                <div class="flex flex-row justify-between pt-2 mt-6 mb-6 border-t-2 ">
+                    <p class="uppercase font-mulish">Total</p>
                     <p class="font-mulish">{{ formatRupiah(totalPay) }}</p>
                 </div>
 
             </div>
           </div>
         </main>
-        <footer class=" border-t-2 bottom-0 fixed w-full z-20 bg-gray-50">
+        <footer class="fixed bottom-0 z-20 w-full border-t-2 bg-gray-50">
             <div class="container py-2">
-                <p class="font-mulish text-sm">Pilih Metode Pembayaran</p>
+                <p class="text-sm font-mulish">Pilih Metode Pembayaran</p>
                 <div class="container py-2" v-if="paymentMethod == null" @click="open">
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-col">
-                            <p class="font-mulish text-lg font-bold">Pilih Bank</p>
+                            <p class="text-lg font-bold font-mulish">Pilih Bank</p>
                             <p class="font-mulish">Jenis Pembayaran</p>
                         </div>
                         <div class="flex items-center mt-4">
-                            <font-awesome-icon  :icon="['fas', 'chevron-right']" size="sm" class=" align-middle ms-2 mb-6"/>
+                            <font-awesome-icon  :icon="['fas', 'chevron-right']" size="sm" class="mb-6 align-middle ms-2"/>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <button @click="bayar" class="rounded-full bg-primaryColors w-full py-1 my-2 font-mulish text-white">Bayar Sekarang</button>
+                <button @click="bayar" class="w-full py-1 my-2 text-white rounded-full bg-primaryColors font-mulish">Bayar Sekarang</button>
             </div>
         </footer>
     </div>
@@ -155,7 +155,6 @@ export default {
             itemLength : 0,
             totalPay : 0
         }
-      
     },
     methods : {
         setData(){
@@ -276,8 +275,6 @@ export default {
                 })
                 this.paymentMethod = null
             }
-
-
         },
         setMetodeBayar(data){
             const bayar  = data

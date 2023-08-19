@@ -1,11 +1,12 @@
 <style>
 .bottom-sheet__card{
-    height: 50% !important;
+    width: 100% !important;
+    height: 90% !important;
 }
 </style>
 <template>
     <div class="flex flex-col h-100" v-if="pembayaranSuccess == null">
-        <header class="bg-primaryColors top-0 sticky w-full">
+        <header class="sticky top-0 w-full bg-primaryColors">
             <div class="container flex flex-row items-center justify-between">
                 <font-awesome-icon class="text-white" icon="arrow-left" @click="this.$router.push({name :'home'})"/>
                 <p class="text-center text-white font-[500px] font-mulish py-4">Setor Tabungan</p>
@@ -14,21 +15,21 @@
         </header>
         <main class="flex-grow pt-4">
             <div class="container flex flex-col gap-y-3">
-                <input v-model="nominal" type="text" class="border-2 rounded-lg border-gray-400  px-2 py-4 w-full font-mulish" placeholder="Masukkan Nominal" />
-                <input v-model="catatan" type="text" class="border-2 rounded-lg border-gray-400  px-2 py-4 w-full font-mulish" placeholder="Catatan" />
+                <input v-model="nominal" type="text" class="w-full px-2 py-4 border-2 border-gray-400 rounded-lg font-mulish" placeholder="Masukkan Nominal" />
+                <input v-model="catatan" type="text" class="w-full px-2 py-4 border-2 border-gray-400 rounded-lg font-mulish" placeholder="Catatan" />
             </div>
         </main>
-        <footer class="  border-t-2 bottom-0 fixed w-full">
+        <footer class="fixed bottom-0 w-full border-t-2 ">
             <div class="container py-2">
-                <p class="font-mulish text-sm">Pilih Metode Pembayaran</p>
+                <p class="text-sm font-mulish">Pilih Metode Pembayaran</p>
                 <div class="container py-2" v-if="paymentMethod == null" @click="open">
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-col">
-                            <p class="font-mulish text-lg font-bold">Pilih Bank</p>
+                            <p class="text-lg font-bold font-mulish">Pilih Bank</p>
                             <p class="font-mulish">Jenis Pembayaran</p>
                         </div>
                         <div class="flex items-center mt-4">
-                            <font-awesome-icon  :icon="['fas', 'chevron-right']" size="sm" class=" align-middle ms-2 mb-6"/>
+                            <font-awesome-icon  :icon="['fas', 'chevron-right']" size="sm" class="mb-6 align-middle  ms-2"/>
                         </div>
                     </div>
                 </div>
@@ -43,14 +44,14 @@
                         </div>
                     </div>
                 </div>
-                <button @click="bayarTabungan" class="rounded-full bg-primaryColors w-full py-1 my-2 font-mulish text-white">Bayar Sekarang</button>
+                <button @click="bayarTabungan" class="w-full py-1 my-2 text-white rounded-full bg-primaryColors font-mulish">Bayar Sekarang</button>
             </div>
         </footer>
     </div>
     <!-- bottom sheet -->
     <vue-bottom-sheet ref="metodeBayar">
             <div class="container">
-                <p class="text-gray-400 mb-3 font-mulish">Pilih Metode Pembayaran</p>
+                <p class="mb-3 text-gray-400 font-mulish">Pilih Metode Pembayaran</p>
                 <!-- <div class="grid grid-cols-3 gap-3 pt-4" > -->
                 <Accordion always-open  v-for="item in listMetodeBayar"  :key="item">
                     <accordion-panel>

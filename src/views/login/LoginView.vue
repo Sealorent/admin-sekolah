@@ -2,19 +2,19 @@
     <div class="flex flex-col h-100" >
         <main class="flex-grow">
             <div class="container pt-2">
-                <div class="w-full flex flex-row justify-center">
+                <div class="flex flex-row justify-center w-full">
                     <img src="@/assets/images/adminsekolah.png" alt="" class="w-20 h-20">
                 </div>
                 <p class="text-center text-[15px] font-mulish font-[600] pt-6">Assalamu'alaikum Selamat Datang Di</p>
                 <p class="text-center text-[20px] font-mulish font-bold">Admin Sekolah</p>
-                <div class="flex flex-col item-center gap-y-2 container pt-10">
-                    <input v-model="kode_sekolah" type="text" class=" font-mulish border-2 rounded-lg border-gray-400  px-2 py-3 mb-3" placeholder="Kode Sekolah" />
-                    <input v-model="nis" type="text" class="font-mulish border-2 rounded-lg border-gray-400  px-2 py-3" placeholder="NIS" />
+                <div class="container flex flex-col pt-10 item-center gap-y-2">
+                    <input v-model="kode_sekolah" type="text" class="px-2 py-3 mb-3 border-2 border-gray-400 rounded-lg  font-mulish" placeholder="Kode Sekolah" />
+                    <input v-model="nis" type="text" class="px-2 py-3 border-2 border-gray-400 rounded-lg font-mulish" placeholder="NIS" />
                     <PasswordContainer v-model:value="password" title="Password" />
                     <small class="text-end text-primaryColors"><button @click="this.$router.push('/resetPassword')"> Lupa Password ?</button></small>
-                    <button @click="loginRequest" class="rounded-full border-2 w-full text-white  h-12 bg-primaryColors" >Lanjut</button>
-                    <a href="" class="font-mulish text-red-500 text-center text-md">{{ error }}</a>
-                    <a href="" class="font-mulish text-primaryColors text-center text-md">Hapus Riwayat</a>
+                    <button @click="loginRequest" class="w-full h-12 text-white border-2 rounded-full bg-primaryColors" >Lanjut</button>
+                    <a href="" class="text-center text-red-500 font-mulish text-md">{{ error }}</a>
+                    <a href="" class="text-center font-mulish text-primaryColors text-md">Hapus Riwayat</a>
                 </div>
             </div>
         </main>

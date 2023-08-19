@@ -3,57 +3,61 @@
   border-bottom-left-radius: 50% 8%;
   border-bottom-right-radius: 50% 8%;
 }
+.bottom-sheet__card{
+    width: 100% !important;
+    height: 20% !important;
+}
 </style>
 <template>
         <div class="flex flex-col h-100">
         <header class="bg-primaryColors bg_home ">
             <div class="flex justify-between w-full pt-2">
                 <div class="container">
-                    <p class="text-white text-md  font-montserrat font-thin">{{ user.nama_pesantren }}</p>
+                    <p class="font-thin text-white text-md font-montserrat">{{ user.nama_pesantren }}</p>
                 </div>
-                <div v-on:click="open" class="container flex justify-end items-center gap-x-4">
-                    <p class="text-white text-lg  font-montserrat font-thin">Keluar</p>
+                <div v-on:click="open" class="container flex items-center justify-end gap-x-4">
+                    <p class="text-lg font-thin text-white font-montserrat">Keluar</p>
                     <font-awesome-icon :icon="['fas', 'right-from-bracket']" class="text-white" />
                 </div>
             </div>
             <div class="flex justify-between w-full pt-3 pb-3">
-                <div class="container flex flex-col justify-center items-start w-80 ">
-                    <p class="text-white text-md  font-montserrat ">{{ user.nama }}</p>
-                    <p class="text-sm  font-montserrat font-light text-gray-300">{{ user.kelas }}</p>
+                <div class="container flex flex-col items-start justify-center w-80 ">
+                    <p class="text-white text-md font-montserrat ">{{ user.nama }}</p>
+                    <p class="text-sm font-light text-gray-300 font-montserrat">{{ user.kelas }}</p>
                 </div>
-                <div class=" container flex flex-grow justify-end  items-center w-40">
-                    <div class="rounded-full h-20 w-20 border-2 overflow-hidden" >
-                        <img alt="profile-image" class="object-cover h-full w-full" :src="imageProfile"/>
+                <div class="container flex items-center justify-end flex-grow w-40 ">
+                    <div class="w-20 h-20 overflow-hidden border-2 rounded-full" >
+                        <img alt="profile-image" class="object-cover w-full h-full" :src="imageProfile"/>
                     </div>
                 </div>
             </div>
         </header>
-        <main class="pt-4 flex-grow  ">
+        <main class="flex-grow pt-4 ">
             <div class="">
                 <!-- menu Button -->
                 <div class="container pt-2 text-center">
                     <div class="grid grid-cols-4 gap-3">
-                        <div class="flex-col justify-center items-center" v-on:click="$router.push({name:`${item.route}`})" v-for="item in menu" :key="item">
-                            <div class="flex justify-center items-center rounded-3xl w-14 h-14 mx-auto  bg-opacity-50" :class="item.bg_color" >
+                        <div class="flex-col items-center justify-center" v-on:click="$router.push({name:`${item.route}`})" v-for="item in menu" :key="item">
+                            <div class="flex items-center justify-center mx-auto bg-opacity-50 rounded-3xl w-14 h-14" :class="item.bg_color" >
                                 <img :src="getImgUrl(item.icon)" alt="" style="width: 60%;">
                             </div>
                             <div class="flex items-center justify-center pt-3">
-                                <p class="text-black font-bold font-mulish text-sm ">{{ item.name }}</p>
+                                <p class="text-sm font-bold text-black font-mulish ">{{ item.name }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- carousel -->
                 <div class="container px-5 pt-6 pb-2">
-                    <div class="flex justify-between items-center ">
-                        <p class="font-mulish font-bold ">Informasi</p>
-                        <button class="font-mulish font-light " @click="$router.push({name : 'informasi'})">Lihat Semua </button>
+                    <div class="flex items-center justify-between ">
+                        <p class="font-bold font-mulish ">Informasi</p>
+                        <button class="font-light font-mulish " @click="$router.push({name : 'informasi'})">Lihat Semua </button>
                     </div>
-                    <div class="container pb-32 pt-3">
+                    <div class="container pt-3 pb-32">
                         <Carousel v-if="isLoadingImage" :itemsToShow="3" :wrapAround="true" :transition="500"  :autoplay="2000"  pause-autoplay-on-hover>
                             <Slide v-for="i in 3" :key="i">
                                 <div class="carousel__item">
-                                    <div class="container w-40 h-40 flex items-center justify-center">
+                                    <div class="container flex items-center justify-center w-40 h-40">
                                         <spinner color="green" size="8" />
                                     </div>
                                 </div>
@@ -78,14 +82,14 @@
             </div>
         </main>
         <!-- bottom bar -->
-        <footer class=" bg-primaryColors flex bottom-0 fixed w-full">
+        <footer class="fixed bottom-0 flex w-full bg-primaryColors">
             <MenuBottomBar/>
         </footer>
         <vue-bottom-sheet ref="myBottomSheet">
             <p class="ms-4">Anda yakin akan keluar akun ?</p>
             <div class="grid grid-cols-2 gap-2 mx-2 mt-3 ">
-                <button class="border-2 w-full rounded-full" @click="close">Batal</button>
-                <button class="border-2 w-full rounded-full bg-primaryColors font-mulish text-white p-2 shadow-lg" @click="logOut">Keluar</button>
+                <button class="w-full border-2 rounded-full" @click="close">Batal</button>
+                <button class="w-full p-2 text-white border-2 rounded-full shadow-lg bg-primaryColors font-mulish" @click="logOut">Keluar</button>
             </div>
         </vue-bottom-sheet>
     </div>

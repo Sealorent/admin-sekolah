@@ -152,24 +152,37 @@ const router = createRouter({
       path: '/getPdf/:type',
       name: 'getPdf',
       component: () => import('../components/PdfViewer.vue')
+    },
+    {
+      path: '/error-width',
+      name: 'errorWidth',
+      component: () => import('@/components/page/ErrorWidth.vue')
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   let login = JSON.parse(localStorage.getItem('login'))
+  const minimalWidth = 600
 
-  if (
-    to.name !== 'login' &&
-    to.name !== 'verifyOtp' &&
-    to.name !== 'changePassword' &&
-    to.name !== 'resetPassword' &&
-    !login
-  ) {
-    next({ name: 'login' })
+  if (!login) {
+    // Handle unauthenticated users
+    if (
+      to.name === 'login' ||
+      to.name === 'resetPassword' ||
+      to.name === 'verifikasiOtp' ||
+      to.name === 'changePassword'
+    ) {
+      next() // Allow navigation to these pages
+    } else {
+      next({ name: 'login' }) // Redirect to login page
+    }
+  } else if (to.name === 'login') {
+    next({ name: 'home' }) // Redirect to home page if already logged in
+  } else if (window.innerWidth > minimalWidth && to.name !== 'errorWidth') {
+    next({ name: 'errorWidth' }) // Redirect to errorWidth page if width is less than minimalLaptopWidth
   } else {
-    // app.config.globalProperties.$user = login
-    next()
+    next() // Continue with navigation
   }
 })
 

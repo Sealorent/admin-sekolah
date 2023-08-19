@@ -1,19 +1,19 @@
 
 <template>
-    <div class="h-100 w-full ">
+    <div class="w-full h-100 ">
         <header class="">
             <div class="flex flex-row justify-between">
-                <font-awesome-icon class="text-primaryColors m-4" icon="arrow-left" @click="$router.push({name : 'login'})" />
+                <font-awesome-icon class="m-4 text-primaryColors" icon="arrow-left" @click="$router.push({name : 'login'})" />
                 <p class="m-4"></p>
             </div>
         </header>
         <div class="container">
             <img src="@/assets/images/forgotpassword.svg" alt="">
-            <div class="container flex flex-col justify-center items-center gap-y-2">
-                <input v-model="kode_sekolah" type="text" class="border-2 rounded-lg border-gray-400  px-2 py-3 w-80 " placeholder="Kode Sekolah" />
-                <input v-model="nis" type="text" class="border-2 rounded-lg border-gray-400  px-2 py-3 w-80" placeholder="NIS Siswa" />
-                <input v-model="nomor_wa" type="text" class="border-2 rounded-lg border-gray-400  px-2 py-3 w-80" placeholder="Nomor Whatsapp" />
-                <button @click="getOtp" class="rounded-full focus:border-2 focus:border-white w-28 text-white  h-12 bg-primaryColors" >Verifikasi</button>
+            <div class="container flex flex-col items-center justify-center gap-y-2">
+                <input v-model="kode_sekolah" type="text" class="px-2 py-3 border-2 border-gray-400 rounded-lg w-80 " placeholder="Kode Sekolah" />
+                <input v-model="nis" type="text" class="px-2 py-3 border-2 border-gray-400 rounded-lg w-80" placeholder="NIS Siswa" />
+                <input v-model="nomor_wa" type="text" class="px-2 py-3 border-2 border-gray-400 rounded-lg w-80" placeholder="Nomor Whatsapp" />
+                <button @click="getOtp" class="h-12 text-white rounded-full focus:border-2 focus:border-white w-28 bg-primaryColors" >Verifikasi</button>
             </div>
         </div>
     </div>
@@ -57,13 +57,6 @@ export default {
                     text : state.error
                 })
             }
-            // state.success ? this.$router.push({name : 'verify-otp'}) : ''
-            // this.isLoading = state.loading
-            // this.$snackbar.add({
-            //     type : 'error',
-            //     text : state.error
-            // }) 
-
         }
     }
 }  

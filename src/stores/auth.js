@@ -26,8 +26,6 @@ export const auth = defineStore('auth', {
         if (response.data.is_correct) {
           this.user = response.data
           this.loading = false
-
-          /* set auth and user to local storage */
           mainLocalStorage.setSessionLogin(data, response.data)
         } else {
           this.loading = false

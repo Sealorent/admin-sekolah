@@ -103,12 +103,7 @@ export const tabungan = defineStore('tabungan', {
         let response = await mainRepositories.caraPembayaran(data)
         console.log(response)
         console.log(response.data.bank)
-        if (
-          response.data.is_correct &&
-          response.data != ' ' &&
-          response.data != null &&
-          response.data.bank != null
-        ) {
+        if (response.data.is_correct && response.data.bank != null) {
           console.log('success')
           this.data = response.data
           this.loading = false
