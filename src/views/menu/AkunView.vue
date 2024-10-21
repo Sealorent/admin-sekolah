@@ -108,7 +108,7 @@ export default {
     data(){
         return{
             data : MainLocalStorage.getUser(),
-            socialMedia : MainLocalStorage.getUser().setting,
+            socialMedia : MainLocalStorage.getUser()?.setting,
             imageProfile : null
         }
     },

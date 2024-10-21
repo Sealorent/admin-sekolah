@@ -9,6 +9,7 @@
         <div class="container">
             <img src="@/assets/images/secureData.svg" alt="">
             <div class="container flex flex-col justify-center items-center gap-y-2">
+                <PasswordContainer title="Password Lama" v-model:value="oldPassword" />
                 <PasswordContainer title="Password Baru" v-model:value="newPassword" />
                 <PasswordContainer title="Konfirmasi Password Baru" v-model:value="confirmPassword" />
                 <button @click="changePassword" class="rounded-full focus:border-2 focus:border-white w-28 text-white  h-12 bg-primaryColors" >Verifikasi</button>
@@ -33,6 +34,7 @@ export default {
         return{
             newPassword : '',
             confirmPassword : '',
+            oldPassword : ''
         }
     },
     methods : {
@@ -43,7 +45,12 @@ export default {
                     text : this.checkPassword().error
                 })
             }else{
-                let res = await passwordStore.editPassword(this.newPassword)
+                console.log('change password', this.oldPassword, this.newPassword);
+                let res = await passwordStore.resetPassword(
+                    this.oldPassword,
+                    this.newPassword,
+                );
+                console.log('res', res);
                 let state = JSON.parse(res)
                 if(state.success){
                     this.$snackbar.add({
@@ -57,7 +64,6 @@ export default {
                         text : state.error
                     })
                 }
-
             }
         },
         checkPassword(){

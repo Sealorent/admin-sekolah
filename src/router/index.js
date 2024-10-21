@@ -179,9 +179,11 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.name === 'login') {
     next({ name: 'home' }) // Redirect to home page if already logged in
-  } else if (window.innerWidth > minimalWidth && to.name !== 'errorWidth') {
-    next({ name: 'errorWidth' }) // Redirect to errorWidth page if width is less than minimalLaptopWidth
-  } else {
+  } 
+  // else if (window.innerWidth > minimalWidth && to.name !== 'errorWidth') {
+  //   next({ name: 'errorWidth' }) // Redirect to errorWidth page if width is less than minimalLaptopWidth
+  // } 
+  else {
     next() // Continue with navigation
   }
 })

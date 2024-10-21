@@ -13,7 +13,7 @@
         <header class="bg-primaryColors bg_home ">
             <div class="flex justify-between w-full pt-2">
                 <div class="container">
-                    <p class="font-thin text-white text-md font-montserrat">{{ user.nama_pesantren }}</p>
+                    <p class="font-thin text-white text-md font-montserrat">{{ user?.nama_pesantren ?? '' }}</p>
                 </div>
                 <div v-on:click="open" class="container flex items-center justify-end gap-x-4">
                     <p class="text-lg font-thin text-white font-montserrat">Keluar</p>
@@ -22,8 +22,8 @@
             </div>
             <div class="flex justify-between w-full pt-3 pb-3">
                 <div class="container flex flex-col items-start justify-center w-80 ">
-                    <p class="text-white text-md font-montserrat ">{{ user.nama }}</p>
-                    <p class="text-sm font-light text-gray-300 font-montserrat">{{ user.kelas }}</p>
+                    <p class="text-white text-md font-montserrat ">{{ user?.nama ?? '-' }}</p>
+                    <p class="text-sm font-light text-gray-300 font-montserrat">{{ user?.kelas ?? '-' }}</p>
                 </div>
                 <div class="container flex items-center justify-end flex-grow w-40 ">
                     <div class="w-20 h-20 overflow-hidden border-2 rounded-full" >
@@ -176,7 +176,7 @@ export default {
 
     },
     mounted(){
-        this.imageProfile = this.user.photo != null ? this.user.photo : 'src/assets/images/dummyProfile.png';
+        this.imageProfile = this.user?.photo != null ? this.user.photo : 'src/assets/images/dummyProfile.png';
         const filteredArray = FilterArrayObject.filterArraysByProperty(this.menu, this.user.navmenu, 'name');
         this.menu = filteredArray;
         console.log(this.user);
