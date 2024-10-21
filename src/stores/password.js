@@ -112,7 +112,7 @@ export const password = defineStore('password', {
       }
       this.setFormData(sendData);
       try {
-        const response = await MainRepositories.resetPassword(this.formData);
+        const response = await MainRepositories.changePassword(this.formData);
         console.log('reset Password Response');
         console.log(response);
         if (response.data.is_correct) {

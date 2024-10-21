@@ -12,7 +12,7 @@
                 <PasswordContainer title="Password Lama" v-model:value="oldPassword" />
                 <PasswordContainer title="Password Baru" v-model:value="newPassword" />
                 <PasswordContainer title="Konfirmasi Password Baru" v-model:value="confirmPassword" />
-                <button @click="changePassword" class="rounded-full focus:border-2 focus:border-white w-28 text-white  h-12 bg-primaryColors" >Verifikasi</button>
+                <button @click="changePassword" class="rounded-full focus:border-2 focus:border-white px-10 my-5 text-white  h-12 bg-primaryColors" >Rubah Password</button>
             </div>
         </div>
     </div>

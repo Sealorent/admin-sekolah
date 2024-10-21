@@ -49,7 +49,15 @@ class mainRepositories {
       url: Const.getUrl('reset_password.php'),
       data: data
     }
-
+    return axios(config)
+  }
+  
+  changePassword(data) {
+    var config = {
+      method: 'post',
+      url: Const.getUrl('edit_password.php'),
+      data: data
+    }
     return axios(config)
   }
 
