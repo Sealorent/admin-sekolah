@@ -101,7 +101,7 @@ export const password = defineStore('password', {
       // }
     },
     async resetPassword(oldPassword, newPassword) {
-      console.log('resetPassword', oldPassword, newPassword);
+      // console.log('resetPassword', oldPassword, newPassword);
       const { kode_sekolah, nis } = mainLocalStorage.getParamsChangePassword();
       const sendData = {
         student_nis : nis,
@@ -113,8 +113,7 @@ export const password = defineStore('password', {
       this.setFormData(sendData);
       try {
         const response = await MainRepositories.changePassword(this.formData);
-        console.log('reset Password Response');
-        console.log(response);
+        console.log('response reset password', response);
         if (response.data.is_correct) {
           this.success = true
           this.data = response.data

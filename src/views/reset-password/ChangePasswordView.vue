@@ -45,12 +45,11 @@ export default {
                     text : this.checkPassword().error
                 })
             }else{
-                console.log('change password', this.oldPassword, this.newPassword);
                 let res = await passwordStore.resetPassword(
                     this.oldPassword,
                     this.newPassword,
                 );
-                console.log('res', res);
+                console.log('result change password', res);
                 let state = JSON.parse(res)
                 if(state.success){
                     this.$snackbar.add({
