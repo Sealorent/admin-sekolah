@@ -52,6 +52,12 @@ export default {
     },
     methods : {
         async loginRequest(){
+            if(this.kode_sekolah == '' || this.nis == '' || this.password == ''){
+               this.$snackbar.add({
+                   type : 'error',
+                   text : 'Data tidak boleh kosong'
+               })
+            }
             /* data */
             const data = {
                 kode_sekolah : this.kode_sekolah,
