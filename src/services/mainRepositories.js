@@ -6,7 +6,7 @@ class mainRepositories {
   login(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('get_student_2.php'),
+      url: Const.getUrl('get_student.php'),
       data: data
     }
     return axios(config)
