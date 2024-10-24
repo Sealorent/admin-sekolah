@@ -4,12 +4,9 @@ import axios from 'axios'
 
 class mainRepositories {
   login(data) {
-    var config = {
-      method: 'post',
-      url: Const.getUrl('get_student.php'),
-      data: data
-    }
-    return axios(config)
+    return http.get('get_student.php', {
+      params: { kode_sekolah: data.kode_sekolah, nis: data.nis, password: data.password }
+    });
   }
 
   profil(data) {
