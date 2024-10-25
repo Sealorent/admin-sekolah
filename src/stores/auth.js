@@ -22,7 +22,7 @@ export const auth = defineStore('auth', {
       try {
         this.profil(data)
         this.period(data)
-        let response = await mainRepositories.login(this.formData)
+        let response = await mainRepositories.login(data)
         if (response.data.is_correct) {
           this.user = response.data
           this.loading = false

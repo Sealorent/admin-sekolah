@@ -27,9 +27,8 @@ export default {
     name : "ResetPasswordView",
     data(){
         return{
-            kode_sekolah : '2020123',
-            nis : '20240202',
-            // nomor_wa : '081393597900',
+            kode_sekolah : '',
+            nis : '',
         }
     },
     methods : {
@@ -38,7 +37,6 @@ export default {
             const data = {
                 kode_sekolah : this.kode_sekolah,
                 nis : this.nis,
-                // no_wa : this.nomor_wa
             }
             await store.setData(data);
             this.$router.push({name : 'changePassword'})

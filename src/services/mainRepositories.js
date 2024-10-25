@@ -4,9 +4,17 @@ import axios from 'axios'
 
 class mainRepositories {
   login(data) {
-    return http.get('get_student.php', {
-      params: { kode_sekolah: data.kode_sekolah, nis: data.nis, password: data.password }
-    });
+
+    const params = new URLSearchParams({
+        kode_sekolah: data.kode_sekolah,
+        nis: data.nis,
+        password: data.password
+      });
+
+    const fullUrl = `get_student.php?${params.toString()}`;
+    console.log("Request URL:", fullUrl);
+
+    return http.get(fullUrl);
   }
 
   profil(data) {
