@@ -19,7 +19,8 @@ class MainLocalStorage {
   }
 
   getPeriod() {
-    return JSON.parse(localStorage.getItem('period'))
+    const period = localStorage.getItem('period');
+    return period ? JSON.parse(period) : {};
   }
 
   getUser() {

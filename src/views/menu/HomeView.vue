@@ -69,7 +69,7 @@
                         <Carousel v-if="isLoadingImage == false" :itemsToShow="1" :wrapAround="true" :transition="500"  :autoplay="2000"  pause-autoplay-on-hover>
                             <Slide v-for="slide in slides" :key="slide.id">
                                 <div class="carousel__item" @click="detail(slide)">
-                                    <img :src="slide.detail.foto" alt="" style="width: 1000px; height: 200px;" >
+                                    <img v-if="slide.detail && slide.detail.foto" :src="slide.detail.foto" alt="" style="width: 1000px; height: 200px;">
                                 </div>
                             </Slide>
                             <template #addons>

@@ -62,9 +62,10 @@ export const auth = defineStore('auth', {
     async period(data) {
       try {
         let response = await mainRepositories.period(data)
+        console.log('period', response.data)
         if (response.data.is_correct) {
           this.loading = false
-          mainLocalStorage.setPeriod(response.data.Tahunajaran)
+          mainLocalStorage.setPeriod(response.data.tahunajaran)
         } else {
           this.loading = false
           this.error = response.data.message
