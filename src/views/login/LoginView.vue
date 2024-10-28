@@ -35,9 +35,12 @@ export default {
     name : "LoginView",
     data(){
         return{
-            kode_sekolah : '',
-            nis : '',
-            password : '',
+            // kode_sekolah : '2408088',
+            // nis : '334',
+            // password : '123456',
+            kode_sekolah : '2020123',
+            nis : '20240202',
+            password : '1234567',
             isLoading : false,
             error : null,
         }
@@ -59,6 +62,8 @@ export default {
 
             let response = await authStore.login(data)
             var state = JSON.parse(response)
+
+            console.log('state', state)
 
             /* set state */
             this.isLoading = state.loading

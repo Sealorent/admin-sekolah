@@ -18,11 +18,12 @@ export const auth = defineStore('auth', {
       })
     },
     async login(data) {
-      this.setFormData(data)
+      // this.setFormData(data)
       try {
         this.profil(data)
         this.period(data)
         let response = await mainRepositories.login(data)
+        console.log('login', response.data)
         if (response.data.is_correct) {
           this.user = response.data
           this.loading = false
@@ -44,7 +45,7 @@ export const auth = defineStore('auth', {
         let response = await mainRepositories.profil(data)
         if (response.data.is_correct) {
           this.loading = false
-          console.log(response.data)
+          console.log('profil', response.data)
           this.user = response.data
           mainLocalStorage.setProfil(response.data)
         } else {
