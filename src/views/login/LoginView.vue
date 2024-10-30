@@ -63,8 +63,6 @@ export default {
             let response = await authStore.login(data)
             var state = JSON.parse(response)
 
-            console.log('state', state)
-
             /* set state */
             this.isLoading = state.loading
             if(state.error == null){

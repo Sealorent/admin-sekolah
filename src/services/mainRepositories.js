@@ -1,6 +1,7 @@
 import http from '@/services/httpCommon.js'
 import Const from '@/services/const.js'
 import axios from 'axios'
+import { ApiUrl } from './const';
 
 class mainRepositories {
   login(data) {
@@ -11,21 +12,20 @@ class mainRepositories {
         password: data.password
       });
 
-    const fullUrl = `get_student.php?${params.toString()}`;
-    console.log("Request URL:", fullUrl);
-
-    return http.get(fullUrl);
+    return http.get(ApiUrl.LOGIN_STUDENT, {
+      params
+    });
   }
 
   profil(data) {
-    return http.get('profil.php', {
+    return http.get(ApiUrl.PROFILE, {
       params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
     })
   }
 
   /* tahun ajaran */
   period(data) {
-    return http.get('tahun_ajaran.php', {
+    return http.get(ApiUrl.TAHUN_AJARAN, {
       params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
     })
   }
@@ -33,7 +33,7 @@ class mainRepositories {
   sendOtp(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('get_otp.php'),
+      url: Const.getUrl(ApiUrl.GET_OTP),
       data: data
     }
     return axios(config)
@@ -42,7 +42,7 @@ class mainRepositories {
   verifyOtp(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('verify_otp.php'),
+      url: Const.getUrl(ApiUrl.VERIFY_OTP),
       data: data
     }
     return axios(config)
@@ -51,7 +51,7 @@ class mainRepositories {
   resetPassword(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('reset_password.php'),
+      url: Const.getUrl(ApiUrl.RESET_PASSWORD),
       data: data
     }
     return axios(config)
@@ -60,14 +60,14 @@ class mainRepositories {
   changePassword(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('edit_password.php'),
+      url: Const.getUrl(ApiUrl.CHANGE_PASSWORD),
       data: data
     }
     return axios(config)
   }
 
   informasi(data) {
-    return http.get('informasi.php', {
+    return http.get(ApiUrl.INFORMATION, {
       params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
     })
   }
@@ -75,7 +75,7 @@ class mainRepositories {
   historyTransaksi(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('list_transaksi.php'),
+      url: Const.getUrl(ApiUrl.LIST_TRANSAKSI),
       data: data
     }
     return axios(config)
@@ -84,7 +84,7 @@ class mainRepositories {
   updateProfil(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('edit_profil1.php'),
+      url: Const.getUrl(ApiUrl.EDIT_PROFILE),
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -96,7 +96,7 @@ class mainRepositories {
   editPassword(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('edit_password.php'),
+      url: Const.getUrl(ApiUrl.CHANGE_PASSWORD),
       data: data
     }
     return axios(config)
@@ -105,7 +105,7 @@ class mainRepositories {
   getListBulanan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('pembayaran_2.php'),
+      url: Const.getUrl(ApiUrl.PAYMENTS),
       data: data
     }
     return axios(config)
@@ -114,7 +114,7 @@ class mainRepositories {
   postBayarBulanan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('tagihan_bulan_bayar.php'),
+      url: Const.getUrl(ApiUrl.BAYAR_BULANAN),
       data: data
     }
     return axios(config)
@@ -123,7 +123,7 @@ class mainRepositories {
   postBayarBebas(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('tagihan_bebas_bayar.php'),
+      url: Const.getUrl(ApiUrl.TAGIHAN_BAYAR_BEBAS),
       data: data
     }
     return axios(config)
@@ -132,7 +132,7 @@ class mainRepositories {
   getListBebas(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('pembayaran_bebas2.php'),
+      url: Const.getUrl(ApiUrl.PAYMENT_BEBAS),
       data: data
     }
     return axios(config)
@@ -141,7 +141,7 @@ class mainRepositories {
   getListBayarBebas(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('bayar_tagihan_bebas2.php'),
+      url: Const.getUrl(ApiUrl.BAYAR_BEBAS),
       data: data
     }
     return axios(config)
@@ -150,14 +150,14 @@ class mainRepositories {
   getListRingkasan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('ringkasan_pembayaran.php'),
+      url: Const.getUrl(ApiUrl.RINGKASAN),
       data: data
     }
     return axios(config)
   }
 
   getListTabungan(data) {
-    return http.get('tabungan.php', {
+    return http.get(ApiUrl.TABUNGAN, {
       params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
     })
   }
@@ -165,7 +165,7 @@ class mainRepositories {
   listMetodeBayarTabungan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('top_up_tabungan.php'),
+      url: Const.getUrl(ApiUrl.TOPUP_TABUNGAN),
       data: data
     }
     return axios(config)
@@ -174,7 +174,7 @@ class mainRepositories {
   topUpTabungan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('top_up_tabungan.php'),
+      url: Const.getUrl(ApiUrl.TOPUP_TABUNGAN),
       data: data
     }
     return axios(config)
@@ -183,7 +183,7 @@ class mainRepositories {
   insertIpaymu(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('insert_ipaymu.php'),
+      url: Const.getUrl(ApiUrl.FLIP),
       data: data
     }
     return axios(config)
@@ -192,7 +192,7 @@ class mainRepositories {
   insertIpaymuTabungan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('insert_ipaymu_tabungan.php'),
+      url: Const.getUrl(ApiUrl.IPAYMU_TABUNGAN),
       data: data
     }
     return axios(config)
@@ -201,7 +201,7 @@ class mainRepositories {
   caraPembayaran(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('cara_pembayaran.php'),
+      url: Const.getUrl(ApiUrl.CARA_BAYAR),
       data: data
     }
     return axios(config)
@@ -210,7 +210,7 @@ class mainRepositories {
   caraPembayaranTabungan(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('cara_pembayaran_tabungan.php'),
+      url: Const.getUrl(ApiUrl.CARA_BAYAR_TABUNGAN),
       data: data
     }
     return axios(config)
@@ -219,7 +219,7 @@ class mainRepositories {
   listKonfirmasi(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('info_upload_pembayaran.php'),
+      url: Const.getUrl(ApiUrl.KONFIRMASI),
       data: data
     }
     return axios(config)
@@ -228,7 +228,7 @@ class mainRepositories {
   uploadBuktiKonfirmasi(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('upload_bukti_bayar.php'),
+      url: Const.getUrl(ApiUrl.UPLOAD_BUKTI),
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -240,7 +240,7 @@ class mainRepositories {
   listTahfidz(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('tahfidz2.php'),
+      url: Const.getUrl(ApiUrl.TAHFIDZ),
       data: data
     }
     return axios(config)
@@ -249,7 +249,7 @@ class mainRepositories {
   listIzin(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('izin2.php'),
+      url: Const.getUrl(ApiUrl.IZIN_KELUAR),
       data: data
     }
     return axios(config)
@@ -258,7 +258,7 @@ class mainRepositories {
   addIzin(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('add_izin.php'),
+      url: Const.getUrl(ApiUrl.ADD_IZIN),
       data: data
     }
     return axios(config)
@@ -267,7 +267,7 @@ class mainRepositories {
   listKonseling(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('konseling2.php'),
+      url: Const.getUrl(ApiUrl.KONSELING),
       data: data
     }
     return axios(config)
@@ -276,7 +276,7 @@ class mainRepositories {
   listPresensi(data) {
     var config = {
       method: 'post',
-      url: Const.getUrl('presensi2.php'),
+      url: Const.getUrl(ApiUrl.PRESENSI),
       data: data
     }
     return axios(config)
@@ -289,7 +289,7 @@ class mainRepositories {
   }
 
   getTagihanBulananPdf(data) {
-    return http.get('unduh_tagihan.php', {
+    return http.get(ApiUrl.UNDUH_TAGIHAN, {
       params: { kode_sekolah: data.kode_sekolah, nis: data.nis }
     })
   }

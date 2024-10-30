@@ -179,7 +179,6 @@ export default {
 
                         const response = await tabunganStore.insertIpaymu(data)
                         const state = JSON.parse(response)
-                        console.log('state1');
                         console.log(state);
 
                         if(state.success){

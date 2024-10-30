@@ -51,7 +51,6 @@ export default {
                 );
                 console.log('result change password', res);
                 let state = JSON.parse(res)
-                console.log('state', state);
                 if(state.success){
                     this.$snackbar.add({
                         type : 'success',
